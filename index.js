@@ -11,7 +11,7 @@ module.exports = function ins_plugin(md) {
 
     if (silent) { return false; }
 
-    if (marker !== 0x3D/* = */) { return false; }
+    if (marker !== ':') { return false; }
 
     scanned = state.scanDelims(state.pos, true);
     len = scanned.length;
@@ -60,7 +60,7 @@ module.exports = function ins_plugin(md) {
     for (i = 0; i < max; i++) {
       startDelim = delimiters[i];
 
-      if (startDelim.marker !== 0x3D/* = */) {
+      if (startDelim.marker !== ':') {
         continue;
       }
 
@@ -74,18 +74,18 @@ module.exports = function ins_plugin(md) {
       token.type    = 'mark_open';
       token.tag     = 'mark';
       token.nesting = 1;
-      token.markup  = '==';
+      token.markup  = '::';
       token.content = '';
 
       token         = state.tokens[endDelim.token];
       token.type    = 'mark_close';
       token.tag     = 'mark';
       token.nesting = -1;
-      token.markup  = '==';
+      token.markup  = '::';
       token.content = '';
 
       if (state.tokens[endDelim.token - 1].type === 'text' &&
-          state.tokens[endDelim.token - 1].content === '=') {
+          state.tokens[endDelim.token - 1].content === ':') {
 
         loneMarkers.push(endDelim.token - 1);
       }
