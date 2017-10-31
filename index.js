@@ -11,7 +11,7 @@ module.exports = function ins_plugin(md) {
 
     if (silent) { return false; }
 
-    if (marker !== ':') { return false; }
+    if (marker !== 58 /* : */) { return false; }
 
     scanned = state.scanDelims(state.pos, true);
     len = scanned.length;
@@ -60,7 +60,7 @@ module.exports = function ins_plugin(md) {
     for (i = 0; i < max; i++) {
       startDelim = delimiters[i];
 
-      if (startDelim.marker !== ':') {
+      if (startDelim.marker !== 58 /* : */) {
         continue;
       }
 
